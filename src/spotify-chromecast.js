@@ -41,7 +41,10 @@ module.exports = function turnOnTvAndPlayUri(uri, offset) {
             client.connect(host, function () {
                 console.log('connected, launching Spotify app on ' + device_name + '...');
                 client.launch(Spotify, function (err, player) {
+			
 
+			//console.log(err);
+			//console.log(player);
                     player
                         .authenticate({
                             username: process.env.SPOTIFY_USERNAME,

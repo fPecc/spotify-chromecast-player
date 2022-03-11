@@ -3,6 +3,7 @@ var castv2Cli = require('castv2-client');
 var RequestResponseController = castv2Cli.RequestResponseController;
 var SpotifyWPAT = require('./spotify-wat');
 var SpotifyWebApi = require('spotify-web-api-node');
+var request = require('request-promise');
 
 function SpotifyController(client, sourceId, destinationId) {
 	RequestResponseController.call(this, client, sourceId, destinationId, 'urn:x-cast:com.spotify.chromecast.secure.v1');
@@ -27,13 +28,46 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 			});
 
 			// Send setCredentials request using web AT
+			console.log('sending getInfo...');
 			that.send({
-				type: 'setCredentials',
-				credentials: access_token
+				type: 'getInfo',
+				payload: {}
 			});
 
 			// Once Chromecast replies, get the list of the devices
 			that.on('message', function (message) {
+				console.log(message);
+				if(message.type === 'getInfoResponse')
+				{
+					var device = message["payload"]["deviceID"]
+            				var client = message["payload"]["clientID"]
+            				//var client = '65b708073fc0480ea92a077233ca87bd'
+					headers = {
+                				'authority': 'spclient.wg.spotify.com',
+                				'authorization': 'Bearer ' + that.access_token,
+                				'content-type': 'text/plain;charset=UTF-8'
+            				}
+
+            				request_body = JSON.stringify({'clientId': client, 'deviceId': device})
+
+            				request({
+						uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
+						method: 'POST',
+						headers: headers, 
+						body: request_body}).then(function(resp){
+            				
+						console.log(response)
+						json_resp = response.json()
+            					that.send({
+                					type: 'addUser',
+                					payload: {
+                    						"blob": json_resp["accessToken"],
+                    						//"blob": that.access_token,
+								"tokenType": "accesstoken"
+                					}
+            					})
+					})
+				}
 				if (message.type === 'setCredentialsResponse') {
 
 					that.api.getMyDevices().then(function (response) {

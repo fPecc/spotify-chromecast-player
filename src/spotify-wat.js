@@ -52,21 +52,12 @@ function getAccessToken(cookiejar) {
 }
 
 exports.getAccessToken = function (username, password) {
-	var cookiejar = rp.jar();
-	cookiejar.setCookie(new tough.Cookie({
-		key: '__bon',
-		value: 'MHwwfC0yMDk5NTIyNzI4fC04ODE3OTk1NDU3NnwxfDF8MXwx', // Get dynamically
-		domain: 'accounts.spotify.com',
-	}), 'https://accounts.spotify.com');
 
-	return getCSRF(cookiejar)
-		.then(function (csrf) {
-			return login(cookiejar, username, password, csrf);
-		})
-		.then(function () {
-			return getAccessToken(cookiejar);
-		})
-		.then(function (token) {
-			return token;
-		});
+
+	return rp({
+		url: 'http://192.168.0.27:8080/rest/items/SpotifyPlayerBridge_AccessToken/state',
+	}).then(function (resp) {
+		console.log(resp)
+		return resp
+	});
 };

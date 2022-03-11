@@ -9,6 +9,10 @@ var fs = require('fs');
 
 var scheduled = null;
 
+app.get("/callback", function (req, res) {
+    console.log(res);
+});
+
 app.get("/", function (req, res) {
     res.send("hello!");
 });
