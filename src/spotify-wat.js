@@ -2,8 +2,6 @@ var rp = require('request-promise');
 var tough = require('tough-cookie');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const xml2js = require('xml2js');
-const parser = new xml2js.Parser({ attrkey: "ATTR" });
 
 //var UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36';
 var UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36';
@@ -20,17 +18,9 @@ exports.getAccessToken = function (username, password) {
 			'sp_dc': process.env.SP_DC, 'sp_key': process.env.SP_KEY
 		}
 	}).then(function(resp){
-		parser.parseString(resp, function(error, result) {
-			if(error === null) {
-				console.log(result);
-			}
-			else {
-				console.log(error);
-			}
-		});
-		//console.log(resp)
-		//var dom = new JSDOM(resp);
-		//console.log(dom.window)
+		console.log(resp)
+		var dom = new JSDOM(resp);
+		console.log(dom.window.document.getElementById('config'))
 		//return JSON.parse(resp).accessToken
 	});
 
