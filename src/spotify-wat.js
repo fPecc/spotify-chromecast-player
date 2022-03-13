@@ -19,7 +19,7 @@ exports.getAccessToken = function (username, password) {
 		}
 	}).then(function(resp){
 		console.log(resp)
-		var json = resp.split('data-testid="config"')[1].split(']</script>')[0].split('type="application/json">')[0];
+		var json = resp.split('data-testid="config"')[1].split(']</script>')[0].split('type="application/json">')[1];
 		console.log('--------------------------------------')
 		console.log(json)
 		//var dom = new JSDOM(resp);
