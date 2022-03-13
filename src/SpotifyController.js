@@ -56,11 +56,11 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					}).then(function(response){
 									
 						console.log(response)
-						json_resp = response.json()
+						json_resp = JSON.parse(response)
 						that.send({
 							type: 'addUser',
 							payload: {
-								"blob": json_resp["accessToken"],
+								"blob": json_resp.accessToken,
 								//"blob": that.access_token,
 								"tokenType": "accesstoken"
 							}
