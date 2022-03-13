@@ -10,7 +10,7 @@ exports.getAccessToken = function (username, password) {
 
 	return rp({
 		//url: 'https://open.spotify.com/get_access_token?reason=transport&productType=web_player',
-		url: 'https://open.spotify.com/browse',
+		url: 'https://open.spotify.com/',
 		headers: {
 			'user-agent': UA
 		},
@@ -23,9 +23,6 @@ exports.getAccessToken = function (username, password) {
 		console.log('--------------------------------------')
 		console.log(json_resp)
 		return json_resp.accessToken;
-		//var dom = new JSDOM(resp);
-		//console.log(dom.window.document.getElementById('config').value)
-		//return JSON.parse(resp).accessToken
 	});
 
 	/*return rp({
