@@ -5,6 +5,8 @@ var SpotifyWPAT = require('./spotify-wat');
 var SpotifyWebApi = require('spotify-web-api-node');
 var request = require('request-promise');
 
+var global_access_token = null;
+
 function SpotifyController(client, sourceId, destinationId) {
 	RequestResponseController.call(this, client, sourceId, destinationId, 'urn:x-cast:com.spotify.chromecast.secure.v1');
 }
@@ -22,6 +24,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 
 		SpotifyWPAT.getAccessToken(username, password).then(function (access_token) {
 			that.access_token = access_token;
+			global_access_token = access_token;
 
 			that.api = new SpotifyWebApi({
 				accessToken: that.access_token
@@ -43,10 +46,10 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
             		var client = message["payload"]["clientID"]
 					headers = {
                 		'authority': 'spclient.wg.spotify.com',
-                		'authorization': 'Bearer ' + that.access_token,
+                		'authorization': 'Bearer ' + global_access_token,
                 		'content-type': 'text/plain;charset=UTF-8'
             		}
-					console.log(that.access_token)
+					console.log(global_access_token)
 
             		request_body = JSON.stringify({'clientId': client, 'deviceId': device})
 
