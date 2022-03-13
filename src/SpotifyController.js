@@ -48,7 +48,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					var client = message["payload"]["clientID"]
 					headers = {
 						'authority': 'spclient.wg.spotify.com',
-						'authorization': 'Bearer BQDiLLQz_WJ2mPueTnGlKy6mArfcfHR04VYY9o629IPA0a36PmFJifxQsLYd0mErFxmcrD4Wr2zzIe_CGoaGH1lTM5v7noh-dZ5OWH-v8zah9Yr8bZq9QBaKouOlikr7VMBKowCULBQLmtzEuhDO9eeR2Bp3hQb5xKy4ZSbgWh5YoI8yW-DO7Z-qLOeV9C7opySmyAc5Dh0QMec6yhf8hqzqVm8XkSBqdzSH1Zm-nmBRHTOHDzD9cjVyy5ZRvpb-7_4u8Lj6IaSYBYh6mZB5WuMBkPfZr-IK5Ikxr3datW3HHoTPzBbcoCu1hdbz',
+						'authorization': 'Bearer ' + access_token,
 						'content-type': 'text/plain;charset=UTF-8'
 					}
 					console.log(access_token)
