@@ -69,7 +69,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					})
 				});
 			}
-			if (message.type === 'setCredentialsResponse') {
+			if (message.type === 'addUserResponse') {
 
 				that.api.getMyDevices().then(function (response) {
 					var devices = response.body.devices;
