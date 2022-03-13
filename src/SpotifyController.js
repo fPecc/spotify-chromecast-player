@@ -38,7 +38,8 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					var device = message["payload"]["deviceID"]
 					var client = message["payload"]["clientID"]
 					headers = {
-						'authority': 'spclient.wg.spotify.com',
+						//'authority': 'spclient.wg.spotify.com',
+						'authority': 'gew1-spclient.spotify.com',
 						'authorization': 'Bearer ' + access_token,
 						'content-type': 'text/plain;charset=UTF-8'
 					}
@@ -47,7 +48,8 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					request_body = JSON.stringify({'clientId': client, 'deviceId': device})
 
 					request({
-						uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
+						//uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
+						uri:'https://gew1-spclient.spotify.com/device-auth/v1/refresh', 
 						method: 'POST',
 						headers: headers, 
 						body: request_body
