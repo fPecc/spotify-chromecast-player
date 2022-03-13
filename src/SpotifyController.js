@@ -40,7 +40,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					headers = {
 						'authority': 'spclient.wg.spotify.com',
 						//'authority': 'gew1-spclient.spotify.com',
-						'authorization': 'Bearer Bearer BQAchS1hDPCGUlL55T7SDEd1YLVMG8taKwLDo-FFJBohP9M67p1kCg1XwJZGpJ6hcVOFb0MS8IduBo1qduJqXQD0gXdUYwil7STHYWUUmYNJS6NB3plJqQw8WupYQgsrhW38jVpdOXx40qb0ixdMIQIvTrJgR-4x8hhdKhhLpSeQpUWeU7sC-_dPf0LWqoBxTSHeUzfGLoa7qd5d9DQfI-UYpcVtG3Jq8jF-EzJlcYxINJlNCf5Q2AcThvwc_uZTY5Sf7BhdEKQgXNc-pBmXH6JQ1Ph9IxYCJxaA5aPGjOHiRXP8KWEfwpDLJXQ4',
+						'authorization': 'Bearer BQAchS1hDPCGUlL55T7SDEd1YLVMG8taKwLDo-FFJBohP9M67p1kCg1XwJZGpJ6hcVOFb0MS8IduBo1qduJqXQD0gXdUYwil7STHYWUUmYNJS6NB3plJqQw8WupYQgsrhW38jVpdOXx40qb0ixdMIQIvTrJgR-4x8hhdKhhLpSeQpUWeU7sC-_dPf0LWqoBxTSHeUzfGLoa7qd5d9DQfI-UYpcVtG3Jq8jF-EzJlcYxINJlNCf5Q2AcThvwc_uZTY5Sf7BhdEKQgXNc-pBmXH6JQ1Ph9IxYCJxaA5aPGjOHiRXP8KWEfwpDLJXQ4',
 						'content-type': 'text/plain;charset=UTF-8'
 					}
 					console.log(access_token)
