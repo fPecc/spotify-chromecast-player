@@ -7,7 +7,8 @@ var UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
 exports.getAccessToken = function (username, password) {
 
 	return rp({
-		url: 'https://open.spotify.com/get_access_token?reason=transport&productType=web_player',
+		//url: 'https://open.spotify.com/get_access_token?reason=transport&productType=web_player',
+		url: 'https://open.spotify.com/browse',
 		headers: {
 			'user-agent': UA
 		},
