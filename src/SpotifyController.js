@@ -51,22 +51,24 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
             				request_body = JSON.stringify({'clientId': client, 'deviceId': device})
 
             				request({
-						uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
-						method: 'POST',
-						headers: headers, 
-						body: request_body}).then(function(resp){
-            				
-						console.log(response)
-						json_resp = response.json()
-            					that.send({
-                					type: 'addUser',
-                					payload: {
-                    						"blob": json_resp["accessToken"],
-                    						//"blob": that.access_token,
-								"tokenType": "accesstoken"
-                					}
-            					})
-					})
+								uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
+								method: 'POST',
+								headers: headers, 
+								body: request_body
+							}).then(function(resp){
+									
+								console.log(response)
+								json_resp = response.json()
+								that.send({
+									type: 'addUser',
+									payload: {
+										"blob": json_resp["accessToken"],
+										//"blob": that.access_token,
+										"tokenType": "accesstoken"
+									}
+								})
+								
+							})
 				}
 				if (message.type === 'setCredentialsResponse') {
 

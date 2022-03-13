@@ -53,11 +53,23 @@ function getAccessToken(cookiejar) {
 
 exports.getAccessToken = function (username, password) {
 
-
 	return rp({
+		url: 'https://open.spotify.com/get_access_token?reason=transport&productType=web_player',
+		headers: {
+			'user-agent': UA
+		},
+		cookies: {
+			'sp_dc': process.env.SP_DC, 'sp_key': process.env.SP_KEY
+		}
+	}).then(function(resp){
+		console.log(resp)
+		return resp.body['accessToken']
+	});
+
+	/*return rp({
 		url: 'http://192.168.0.27:8080/rest/items/SpotifyPlayerBridge_AccessToken/state',
 	}).then(function (resp) {
 		console.log(resp)
 		return resp
-	});
+	});*/
 };
