@@ -20,7 +20,7 @@ exports.getAccessToken = function (username, password) {
 	}).then(function(resp){
 		console.log(resp)
 		var dom = new JSDOM(resp);
-		console.log(dom.getElementById("config"))
+		console.log(dom.window)
 		return JSON.parse(resp).accessToken
 	});
 
