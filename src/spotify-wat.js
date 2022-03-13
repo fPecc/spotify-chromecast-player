@@ -63,8 +63,8 @@ exports.getAccessToken = function (username, password) {
 		}
 	}).then(function(resp){
 		console.log(resp)
-		console.log(resp.accessToken)
-		return resp.accessToken
+		console.log(JSON.parse(resp).accessToken)
+		return JSON.parse(resp).accessToken
 	});
 
 	/*return rp({
