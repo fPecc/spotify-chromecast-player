@@ -22,6 +22,10 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 
 		that.device_name = device_name;
 
+		that.api = new SpotifyWebApi({
+			accessToken: that.access_token
+		});
+
 		// Send setCredentials request using web AT
 		console.log('sending getInfo...');
 		that.send({
@@ -35,12 +39,16 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 			if(message.type === 'getInfoResponse')
 			{
 				SpotifyWPAT.getAccessToken(username, password).then(function (access_token) {
+
+					that.api = new SpotifyWebApi({
+						accessToken: access_token
+					});
+
 					var device = message["payload"]["deviceID"]
 					var client = message["payload"]["clientID"]
 					headers = {
 						'authority': 'spclient.wg.spotify.com',
-						//'authority': 'gew1-spclient.spotify.com',
-						'authorization': 'Bearer BQAchS1hDPCGUlL55T7SDEd1YLVMG8taKwLDo-FFJBohP9M67p1kCg1XwJZGpJ6hcVOFb0MS8IduBo1qduJqXQD0gXdUYwil7STHYWUUmYNJS6NB3plJqQw8WupYQgsrhW38jVpdOXx40qb0ixdMIQIvTrJgR-4x8hhdKhhLpSeQpUWeU7sC-_dPf0LWqoBxTSHeUzfGLoa7qd5d9DQfI-UYpcVtG3Jq8jF-EzJlcYxINJlNCf5Q2AcThvwc_uZTY5Sf7BhdEKQgXNc-pBmXH6JQ1Ph9IxYCJxaA5aPGjOHiRXP8KWEfwpDLJXQ4',
+						'authorization': 'Bearer BQDiLLQz_WJ2mPueTnGlKy6mArfcfHR04VYY9o629IPA0a36PmFJifxQsLYd0mErFxmcrD4Wr2zzIe_CGoaGH1lTM5v7noh-dZ5OWH-v8zah9Yr8bZq9QBaKouOlikr7VMBKowCULBQLmtzEuhDO9eeR2Bp3hQb5xKy4ZSbgWh5YoI8yW-DO7Z-qLOeV9C7opySmyAc5Dh0QMec6yhf8hqzqVm8XkSBqdzSH1Zm-nmBRHTOHDzD9cjVyy5ZRvpb-7_4u8Lj6IaSYBYh6mZB5WuMBkPfZr-IK5Ikxr3datW3HHoTPzBbcoCu1hdbz',
 						'content-type': 'text/plain;charset=UTF-8'
 					}
 					console.log(access_token)
@@ -48,8 +56,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					request_body = JSON.stringify({'clientId': client, 'deviceId': device})
 
 					request({
-						uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
-						//uri:'https://gew1-spclient.spotify.com/device-auth/v1/refresh', 
+						uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh',
 						method: 'POST',
 						headers: headers, 
 						body: request_body
@@ -61,7 +68,6 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 							type: 'addUser',
 							payload: {
 								"blob": json_resp.accessToken,
-								//"blob": that.access_token,
 								"tokenType": "accesstoken"
 							}
 						})
@@ -80,23 +86,6 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 				})
 			}
 		});
-
-		/*SpotifyWPAT.getAccessToken(username, password).then(function (access_token) {
-			that.access_token = access_token;
-			global_access_token = access_token;
-
-			that.api = new SpotifyWebApi({
-				accessToken: that.access_token
-			});
-
-			// Send setCredentials request using web AT
-			console.log('sending getInfo...');
-			that.send({
-				type: 'getInfo',
-				payload: {}
-			});
-
-		})*/
 
 	});
 };
