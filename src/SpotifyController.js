@@ -50,7 +50,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 					request({
 						uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
 						//uri:'https://gew1-spclient.spotify.com/device-auth/v1/refresh', 
-						method: 'OPTIONS',
+						method: 'POST',
 						headers: headers, 
 						body: request_body
 					}).then(function(response){
