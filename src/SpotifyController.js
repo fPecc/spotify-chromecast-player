@@ -40,35 +40,34 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 				if(message.type === 'getInfoResponse')
 				{
 					var device = message["payload"]["deviceID"]
-            				var client = message["payload"]["clientID"]
-            				//var client = '65b708073fc0480ea92a077233ca87bd'
+            		var client = message["payload"]["clientID"]
 					headers = {
-                				'authority': 'spclient.wg.spotify.com',
-                				'authorization': 'Bearer ' + that.access_token,
-                				'content-type': 'text/plain;charset=UTF-8'
-            				}
+                		'authority': 'spclient.wg.spotify.com',
+                		'authorization': 'Bearer ' + that.access_token,
+                		'content-type': 'text/plain;charset=UTF-8'
+            		}
 
-            				request_body = JSON.stringify({'clientId': client, 'deviceId': device})
+            		request_body = JSON.stringify({'clientId': client, 'deviceId': device})
 
-            				request({
-								uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
-								method: 'POST',
-								headers: headers, 
-								body: request_body
-							}).then(function(resp){
+            		request({
+						uri:'https://spclient.wg.spotify.com/device-auth/v1/refresh', 
+						method: 'POST',
+						headers: headers, 
+						body: request_body
+					}).then(function(resp){
 									
-								console.log(response)
-								json_resp = response.json()
-								that.send({
-									type: 'addUser',
-									payload: {
-										"blob": json_resp["accessToken"],
-										//"blob": that.access_token,
-										"tokenType": "accesstoken"
-									}
-								})
-								
-							})
+						console.log(response)
+						json_resp = response.json()
+						that.send({
+							type: 'addUser',
+							payload: {
+								"blob": json_resp["accessToken"],
+								//"blob": that.access_token,
+								"tokenType": "accesstoken"
+							}
+						})
+
+					})
 				}
 				if (message.type === 'setCredentialsResponse') {
 
