@@ -53,7 +53,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
 						method: 'OPTIONS',
 						headers: headers, 
 						body: request_body
-					}).then(function(resp){
+					}).then(function(response){
 									
 						console.log(response)
 						json_resp = response.json()
