@@ -1,5 +1,6 @@
 var rp = require('request-promise');
 var tough = require('tough-cookie');
+const jsdom = require("jsdom");
 
 //var UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36';
 var UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36';
@@ -17,7 +18,8 @@ exports.getAccessToken = function (username, password) {
 		}
 	}).then(function(resp){
 		console.log(resp)
-		console.log(JSON.parse(resp).accessToken)
+		var dom = new JSDOM(resp);
+		console.log(dom)
 		return JSON.parse(resp).accessToken
 	});
 
