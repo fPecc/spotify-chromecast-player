@@ -46,6 +46,7 @@ SpotifyController.prototype.authenticate = function ({ username, password, devic
                 		'authorization': 'Bearer ' + that.access_token,
                 		'content-type': 'text/plain;charset=UTF-8'
             		}
+					console.log(that.access_token)
 
             		request_body = JSON.stringify({'clientId': client, 'deviceId': device})
 
